@@ -8,14 +8,13 @@ X = pd.read_csv('df_reference.csv', sep=',')
 #y = df_reference['TARGET']
 
 
-st.set_page_config(layout="wide")
+st.set_page_config(layout="wide",initial_sidebar_state="collapsed")
 
 
 tab1, tab2, tab3 = st.tabs(["Elegibilité", "Explainability", "Dashboard Interactive"])
 
 with tab1:
-    
-    
+     
 
     st.title("Bienvenue au Place de Marché!")
     st.write(
@@ -25,19 +24,19 @@ with tab1:
     
     # Input 1
     B1 = st.radio("Type de pret?",
-     	("0", "1"), key = "1")
+     	("0", "1"), index=0, key = "1")
     
     # Input 2
     B2 = st.radio("Votre sexe? O=Femme, 1=Homme",
-       	("0", "1"), key = "2")
+       	("0", "1"), index=1, key = "2")
     
     	# Input 3
     B3 = st.radio("Vous etes propriètaire d'une voiture?, 0=Non, 1=Oui",
-        ("0", "1"), key = "3")
+        ("0", "1"), index=0, key = "3")
     
     # Input 4
     B4 = st.radio("Vous etes propriètaire d'une maison/appartement?, 0=Non, 1=Oui",
-        ("0", "1"), key = "4")
+        ("0", "1"), index=1, key = "4")
     
     # Input 5
     B5 = st.number_input("Combien d'enfants avez-vous?",
