@@ -6,8 +6,6 @@ import plotly.figure_factory as ff
 
 # Loads the dataset
 df_plotly = pd.read_csv('plotly.csv', sep=',')
-#X = df_reference.drop(columns=['TARGET'])
-#y = df_reference['TARGET']
 
 st.set_page_config(layout="wide",initial_sidebar_state="collapsed")
 
@@ -24,8 +22,6 @@ def user_input_features():
         B10 = st.sidebar.slider('EXT_SOURCE_3', 0.00000, 1.00000, 0.139376)
         B11 = st.sidebar.slider('AGE', 0,100,26)
         B12 = st.sidebar.slider('ANCIENNITE', 0,80,2)
-
-
     
         # Inputs to ML model
         global data
@@ -125,15 +121,12 @@ with tab1:
         
     
         response = requests.post(f"https://p7fastapi.azurewebsites.net/", json=data)
-     #      response = requests.post(f"http://localhost:8000/", json=data)
         prediction=response.text
  
         if prediction < '0.5': 
             st.write('Accepté :thumbsup:')
-     #      st.image("https://ocp7api.azurewebsites.net/OK")
         else: 
             st.write('Refusé :thumbsdown:') 
-     #      st.image("https://ocp7api.azurewebsites.net/KO")
 
         y=prediction
         st.write('Probability = ', y, '  (Threshold=0.5)')
@@ -146,13 +139,12 @@ with tab2:
     st.header('Client Input parameters')
     st.write(df)
 
-    #     response = requests.post(f"https://p7fastapi.azurewebsites.net/", json=data)
     response = requests.post(f"https://p7fastapi.azurewebsites.net/", json=data)
     prediction=response.text
  
     x=prediction
     st.write('Probability = ', x, '  (Threshold=0.5)')
-#    st.write("---")
+
     if prediction < '0.2': 
          st.write(":thumbsup: Félicitations! Votre crédit est accepté!")
     elif prediction < '0.5': 
@@ -165,25 +157,16 @@ with tab2:
     with col1:
     	
         if prediction < '0.2': 
-    #         st.write(":thumbsup: Félicitations! Votre crédit est accepté!")
-    #         st.write("---")
              st.header('L’interprétabilité locale')
              st.image("local2.png")
         elif prediction < '0.5': 
-    #         st.write(":thumbsup: Félicitations! Votre crédit est accepté!")
-    #         st.write("---")
-             st.header('L’interprétabilité locale')
-    #        st.image("http://localhost:8000/OK")	    
+             st.header('L’interprétabilité locale')    
              st.image("https://p7fastapi.azurewebsites.net/OK")   
         else: 
-    #         st.write(":thumbsdown: Désolé, votre crédit est réfusé. N'hésitez pas à contacter votre téléconseiller pour plus d'information!") 
-    #         st.write("---")
              st.header('L’interprétabilité locale')
-    #         st.image("http://localhost:8000/KO")
              st.image("https://p7fastapi.azurewebsites.net/OK")	
 
     with col2:
-    
             st.header('L’interprétabilité globale')
             st.image("global1.png")
 
@@ -192,7 +175,6 @@ with tab3:
     st.write(df)
 
     response = requests.post(f"https://p7fastapi.azurewebsites.net/", json=data)
-    # response = requests.post(f"http://localhost:8000/", json=data)
     prediction=response.text
  
     x=prediction
